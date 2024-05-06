@@ -109,6 +109,10 @@ std::string PROTOC_EXPORT UnderscoresToCamelCase(absl::string_view input,
                                                  bool cap_next_letter,
                                                  bool preserve_period);
 
+std::string PROTOC_EXPORT UnderscoresToCamelCase1(absl::string_view input,
+                                                 bool cap_next_letter,
+                                                 bool preserve_period);
+
 inline std::string UnderscoresToCamelCase(absl::string_view input,
                                           bool cap_next_letter) {
   return UnderscoresToCamelCase(input, cap_next_letter, false);

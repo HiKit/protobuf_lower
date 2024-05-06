@@ -44,6 +44,13 @@ std::string GetFileNameBase(const FileDescriptor* descriptor) {
     return UnderscoresToPascalCase(StripDotProto(base));
 }
 
+std::string GetFileNameBase1(const FileDescriptor* descriptor) {
+    std::string proto_file = descriptor->name();
+    int lastslash = proto_file.find_last_of('/');
+    std::string base = proto_file.substr(lastslash + 1);
+    return UnderscoresToCamelCase1(StripDotProto(base), true, false);
+}
+
 std::string ToCSharpName(absl::string_view name, const FileDescriptor* file) {
     std::string result = GetFileNamespace(file);
     if (!result.empty()) {
@@ -81,7 +88,7 @@ std::string GetClassName(const EnumDescriptor* descriptor) {
 std::string GetReflectionClassUnqualifiedName(const FileDescriptor* descriptor) {
   // TODO: Detect collisions with existing messages,
   // and append an underscore if necessary.
-  return absl::StrCat(GetFileNameBase(descriptor), "Reflection");
+  return absl::StrCat(GetFileNameBase1(descriptor), "Reflection");
 }
 
 std::string GetReflectionClassName(const FileDescriptor* descriptor) {
@@ -136,6 +143,17 @@ std::string UnderscoresToPascalCase(absl::string_view input) {
 
 // TODO: can we reuse a utility function?
 std::string UnderscoresToCamelCase(absl::string_view input,
+                                    bool cap_next_letter,
+                                    bool preserve_period) {
+  std::string result;
+  for (int i = 0; i < input.size(); i++) {
+    result += input[i];
+  }
+  return result;
+}
+
+// TODO: can we reuse a utility function?
+std::string UnderscoresToCamelCase1(absl::string_view input,
                                    bool cap_next_letter, bool preserve_period) {
   std::string result;
 

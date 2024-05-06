@@ -182,12 +182,17 @@ std::string TryRemovePrefix(absl::string_view prefix, absl::string_view value) {
 // result in an enum value in C# called just Blue
 std::string GetEnumValueName(absl::string_view enum_name,
                              absl::string_view enum_value_name) {
-  std::string stripped = TryRemovePrefix(enum_name, enum_value_name);
-  std::string result = ShoutyToPascalCase(stripped);
-  // Just in case we have an enum name of FOO and a value of FOO_2... make sure
-  // the returned string is a valid identifier.
-  if (absl::ascii_isdigit(result[0])) {
-    return absl::StrCat("_", result);
+  //std::string stripped = TryRemovePrefix(enum_name, enum_value_name);
+  //std::string result = ShoutyToPascalCase(stripped);
+  //// Just in case we have an enum name of FOO and a value of FOO_2... make sure
+  //// the returned string is a valid identifier.
+  //if (absl::ascii_isdigit(result[0])) {
+  //  return absl::StrCat("_", result);
+  //}
+  //return result;
+  std::string result;
+  for (int i = 0; i < enum_value_name.size(); i++) {
+    result += enum_value_name[i];
   }
   return result;
 }
