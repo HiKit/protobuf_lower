@@ -1,3 +1,7 @@
+# 强迫症犯了，不能接受属性名大写开头
+# 基于protobuf，将C#生成的代码大小写做了修改
+
+
 Protocol Buffers - Google's data interchange format
 ===================================================
 
